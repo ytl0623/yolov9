@@ -111,6 +111,19 @@ cd /yolov9
 
 </details>
 
+ Virtual environment (Anaconda)
+<details><summary> <b>Expand</b> </summary>
+
+``` shell
+conda create -n yolov9 Python==3.10
+conda activate yolov9
+
+# Install All the Required Packages
+pip install -r requirements.txt
+```
+
+</details>
+
 
 ## Evaluation
 
