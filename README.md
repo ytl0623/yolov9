@@ -170,7 +170,10 @@ bash scripts/get_coco.sh
 
 * Download [thermal_face_dataset images](https://universe.roboflow.com/vit-chennai-4jgbq/he_a)
 ```shell
-curl -L "https://universe.roboflow.com/ds/vtc4YCss19?key=S7Sqcba87g" &gt; roboflow.zip; unzip roboflow.zip; rm roboflow.zip
+pip install roboflow
+curl -L "https://universe.roboflow.com/ds/vtc4YCss19?key=S7Sqcba87g" > roboflow.zip
+unzip roboflow.zip
+rm roboflow.zip
 ```
 
 Single GPU training
@@ -178,6 +181,10 @@ Single GPU training
 ``` shell
 # train yolov9 models
 python train_dual.py --workers 8 --device 0 --batch 16 --data data/coco.yaml --img 640 --cfg models/detect/yolov9-c.yaml --weights '' --name yolov9-c --hyp hyp.scratch-high.yaml --min-items 0 --epochs 500 --close-mosaic 15
+
+# train yolov9 models on thermal_face_dataset images
+python train_dual.py --workers 8 --device 0 --batch 8 --data 'roboflow/data.yaml' --img 640 --cfg models/detect/yolov9-e.yaml --weights yolov9-e.pt --name yolov9-e-roboflow --hyp hyp.scratch-high.yaml --min-items 0 --epochs 500 --close-mosaic 15
+
 
 # train gelan models
 # python train.py --workers 8 --device 0 --batch 32 --data data/coco.yaml --img 640 --cfg models/detect/gelan-c.yaml --weights '' --name gelan-c --hyp hyp.scratch-high.yaml --min-items 0 --epochs 500 --close-mosaic 15
